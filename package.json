@@ -1,0 +1,10 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "마크다운 기반 정적 블로그 생성기 (외부 의존성 없음)",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node serve.js"
+  }
+}
