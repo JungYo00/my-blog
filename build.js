@@ -12,6 +12,7 @@ const DIST_DIR = path.join(ROOT, 'dist');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const CSS_SRC = path.join(ROOT, 'css');
 const JS_SRC = path.join(ROOT, 'js');
+const GAMES_SRC = path.join(ROOT, 'games', '2048');
 
 function renderTagsHtml(tags) {
   if (!tags || !tags.length) return '';
@@ -103,6 +104,10 @@ function main() {
 
   fs.cpSync(CSS_SRC, path.join(DIST_DIR, 'css'), { recursive: true });
   fs.cpSync(JS_SRC, path.join(DIST_DIR, 'js'), { recursive: true });
+
+  if (fs.existsSync(GAMES_SRC)) {
+    fs.cpSync(GAMES_SRC, path.join(DIST_DIR, '2048'), { recursive: true });
+  }
 
   console.log(`${posts.length}개 포스트 빌드 완료, 출력: dist/`);
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 게임 | My Blog</title>
+  <meta name="description" content="방향키로 숫자 타일을 밀어 합치는 2048 퍼즐 게임">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="../index.html">My Blog</a>
+    <a class="nav-link" href="../2048/index.html">2048</a>
+    <button id="theme-toggle" type="button" aria-label="다크모드 전환"></button>
+  </header>
+  <main class="content-wrapper game-2048-wrapper">
+    <div class="game-2048">
+      <div class="game-header">
+        <h1>2048</h1>
+        <div class="scoreboard">
+          <div class="score-box">
+            <span class="score-label">SCORE</span>
+            <span class="score-value" id="score-value">0</span>
+          </div>
+          <div class="score-box">
+            <span class="score-label">BEST</span>
+            <span class="score-value" id="best-value">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-toolbar">
+        <p class="game-instructions">방향키 또는 스와이프로 타일을 밀어 합쳐보세요.</p>
+        <button id="new-game-btn" class="new-game-btn" type="button">새 게임</button>
+      </div>
+
+      <div class="board-wrapper">
+        <div class="board" id="board">
+          <div class="grid-bg" id="grid-bg"></div>
+          <div class="tile-layer" id="tile-layer"></div>
+        </div>
+
+        <div class="overlay" id="win-overlay" hidden>
+          <div class="overlay-content">
+            <p class="overlay-title">You Win!</p>
+            <div class="overlay-actions">
+              <button id="continue-btn" type="button" class="overlay-btn">계속하기</button>
+              <button id="win-new-game-btn" type="button" class="overlay-btn overlay-btn-primary">새 게임</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay" id="gameover-overlay" hidden>
+          <div class="overlay-content">
+            <p class="overlay-title">Game Over</p>
+            <div class="overlay-actions">
+              <button id="retry-btn" type="button" class="overlay-btn overlay-btn-primary">다시하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="touch-controls" aria-label="방향 버튼">
+        <button class="touch-btn touch-up" type="button" data-dir="up" aria-label="위로 이동">↑</button>
+        <div class="touch-mid-row">
+          <button class="touch-btn touch-left" type="button" data-dir="left" aria-label="왼쪽으로 이동">←</button>
+          <button class="touch-btn touch-down" type="button" data-dir="down" aria-label="아래로 이동">↓</button>
+          <button class="touch-btn touch-right" type="button" data-dir="right" aria-label="오른쪽으로 이동">→</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <p>&copy; 2026 My Blog</p>
+  </footer>
+  <script src="../js/theme.js" defer></script>
+  <script src="game.js" defer></script>
+</body>
+</html>

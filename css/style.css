@@ -81,6 +81,18 @@ a {
   color: var(--color-text);
 }
 
+.nav-link {
+  margin-right: auto;
+  margin-left: 1rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+}
+
+.nav-link:hover {
+  color: var(--color-link);
+}
+
 #theme-toggle {
   min-width: 44px;
   min-height: 44px;

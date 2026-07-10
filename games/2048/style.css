@@ -1,0 +1,298 @@
+/* 2048 게임 전용 스타일. 공통 UI(배경/텍스트/테두리)는 ../css/style.css의
+   커스텀 프로퍼티를 재사용하고, 타일 색상처럼 게임 고유의 색만 여기서 별도
+   커스텀 프로퍼티로 정의한다. */
+
+:root {
+  --tile-bg-2: #eee4da;
+  --tile-text-2: #776e65;
+  --tile-bg-4: #ede0c8;
+  --tile-text-4: #776e65;
+  --tile-bg-8: #f2b179;
+  --tile-text-8: #ffffff;
+  --tile-bg-16: #f59563;
+  --tile-text-16: #ffffff;
+  --tile-bg-32: #f67c5f;
+  --tile-text-32: #ffffff;
+  --tile-bg-64: #f65e3b;
+  --tile-text-64: #ffffff;
+  --tile-bg-128: #edcf72;
+  --tile-text-128: #ffffff;
+  --tile-bg-256: #edcc61;
+  --tile-text-256: #ffffff;
+  --tile-bg-512: #edc850;
+  --tile-text-512: #ffffff;
+  --tile-bg-1024: #edc53f;
+  --tile-text-1024: #ffffff;
+  --tile-bg-2048: #edc22e;
+  --tile-text-2048: #ffffff;
+  --tile-bg-super: #3c3a32;
+  --tile-text-super: #f9f6f2;
+}
+
+.game-2048-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.game-2048 {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--color-text);
+}
+
+.scoreboard {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.score-box {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  text-align: center;
+  min-width: 72px;
+}
+
+.score-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.score-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+}
+
+.game-toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.game-instructions {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.new-game-btn,
+.overlay-btn {
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.new-game-btn:hover,
+.overlay-btn:hover {
+  border-color: var(--color-link);
+}
+
+.overlay-btn-primary {
+  background: var(--color-link);
+  border-color: var(--color-link);
+  color: #ffffff;
+}
+
+.board-wrapper {
+  position: relative;
+  width: min(90vw, 420px);
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.grid-bg {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.grid-cell {
+  background: var(--color-bg);
+  border-radius: 6px;
+}
+
+.tile-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.tile {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.4rem;
+  transition: left 0.12s ease-in-out, top 0.12s ease-in-out;
+  user-select: none;
+}
+
+.tile[data-value="2"] { background: var(--tile-bg-2); color: var(--tile-text-2); }
+.tile[data-value="4"] { background: var(--tile-bg-4); color: var(--tile-text-4); }
+.tile[data-value="8"] { background: var(--tile-bg-8); color: var(--tile-text-8); }
+.tile[data-value="16"] { background: var(--tile-bg-16); color: var(--tile-text-16); }
+.tile[data-value="32"] { background: var(--tile-bg-32); color: var(--tile-text-32); }
+.tile[data-value="64"] { background: var(--tile-bg-64); color: var(--tile-text-64); }
+.tile[data-value="128"] { background: var(--tile-bg-128); color: var(--tile-text-128); font-size: 1.25rem; }
+.tile[data-value="256"] { background: var(--tile-bg-256); color: var(--tile-text-256); font-size: 1.25rem; }
+.tile[data-value="512"] { background: var(--tile-bg-512); color: var(--tile-text-512); font-size: 1.25rem; }
+.tile[data-value="1024"] { background: var(--tile-bg-1024); color: var(--tile-text-1024); font-size: 1.1rem; }
+.tile[data-value="2048"] { background: var(--tile-bg-2048); color: var(--tile-text-2048); font-size: 1.1rem; }
+.tile[data-value="super"] { background: var(--tile-bg-super); color: var(--tile-text-super); font-size: 1rem; }
+
+.tile-new {
+  animation: tile-spawn 0.16s ease-in-out;
+}
+
+.tile-merge-pop {
+  animation: tile-pop 0.18s ease-in-out;
+}
+
+@keyframes tile-spawn {
+  from { transform: scale(0.3); opacity: 0.4; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tile-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay-content {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.overlay-title {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.overlay-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.touch-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: min(90vw, 420px);
+}
+
+.touch-mid-row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.touch-btn {
+  min-width: 52px;
+  min-height: 52px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.touch-btn:active {
+  background: var(--color-border);
+}
+
+@media (max-width: 640px) {
+  .game-header h1 {
+    font-size: 1.4rem;
+  }
+  .score-box {
+    min-width: 60px;
+    padding: 0.35rem 0.6rem;
+  }
+  .tile {
+    font-size: 1.1rem;
+  }
+  .tile[data-value="128"],
+  .tile[data-value="256"],
+  .tile[data-value="512"] {
+    font-size: 1rem;
+  }
+  .tile[data-value="1024"],
+  .tile[data-value="2048"],
+  .tile[data-value="super"] {
+    font-size: 0.85rem;
+  }
+}
