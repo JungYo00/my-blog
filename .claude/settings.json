@@ -16,7 +16,11 @@
       "Bash(bash <(curl *)",
       "Bash(sh <(curl *)",
       "Bash(bash <(wget *)",
-      "Bash(sh <(wget *)"
+      "Bash(sh <(wget *)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)",
+      "Edit(.claude/settings.local.json)",
+      "Write(.claude/settings.local.json)"
     ]
   }
 }
