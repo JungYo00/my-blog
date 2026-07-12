@@ -1,0 +1,142 @@
+/* 픽셀 아트 에디터 전용 스타일. 공통 UI(배경/텍스트/테두리/링크)는 ../css/style.css의
+   커스텀 프로퍼티를 재사용해 다크모드에 자동으로 대응한다. */
+
+.pixel-art-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pixel-art-editor {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.editor-header {
+  width: 100%;
+  text-align: center;
+}
+
+.editor-header h1 {
+  margin: 0 0 0.4rem;
+  font-size: 1.75rem;
+  color: var(--color-text);
+}
+
+.editor-instructions {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.canvas-frame {
+  display: inline-block;
+  line-height: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-bg-secondary);
+  background-image:
+    linear-gradient(45deg, var(--color-border) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-border) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-border) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-border) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  overflow: hidden;
+}
+
+#pixel-canvas {
+  display: block;
+  width: 384px;
+  height: 384px;
+  touch-action: none;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: crosshair;
+}
+
+.palette {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.5rem;
+  justify-items: center;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  padding: 0;
+  cursor: pointer;
+}
+
+.swatch.selected {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.custom-swatch {
+  background: none;
+  padding: 2px;
+}
+
+.toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tool-btn:hover {
+  border-color: var(--color-link);
+}
+
+.tool-btn.active {
+  background: var(--color-link);
+  border-color: var(--color-link);
+  color: #ffffff;
+}
+
+.tool-btn-primary {
+  background: var(--color-link);
+  border-color: var(--color-link);
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  #pixel-canvas {
+    width: 288px;
+    height: 288px;
+  }
+
+  .swatch {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .editor-header h1 {
+    font-size: 1.4rem;
+  }
+}

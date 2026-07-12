@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>픽셀 아트 에디터 | My Blog</title>
+  <meta name="description" content="16x16 격자에 마우스나 터치로 도트를 찍어 그림을 그리고 PNG로 저장할 수 있는 픽셀 아트 에디터">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="../index.html">My Blog</a>
+    <a class="nav-link" href="../2048/index.html">2048</a>
+    <a class="nav-link" href="../pixel-art/index.html">Pixel Art</a>
+    <button id="theme-toggle" type="button" aria-label="다크모드 전환"></button>
+  </header>
+  <main class="content-wrapper pixel-art-wrapper">
+    <div class="pixel-art-editor">
+      <div class="editor-header">
+        <h1>픽셀 아트 에디터</h1>
+        <p class="editor-instructions">격자를 클릭하거나 드래그해서 도트를 찍어보세요.</p>
+      </div>
+
+      <div class="canvas-frame">
+        <canvas id="pixel-canvas" width="384" height="384" aria-label="16x16 픽셀 그리기 격자"></canvas>
+      </div>
+
+      <div class="palette" id="palette" role="group" aria-label="색상 팔레트">
+        <button type="button" class="swatch selected" data-color="#000000" style="background-color:#000000" aria-label="검정 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ffffff" style="background-color:#ffffff" aria-label="흰색 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#808080" style="background-color:#808080" aria-label="회색 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ff0000" style="background-color:#ff0000" aria-label="빨강 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ff8c00" style="background-color:#ff8c00" aria-label="주황 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ffd700" style="background-color:#ffd700" aria-label="노랑 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#00ff00" style="background-color:#00ff00" aria-label="초록 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#00bfff" style="background-color:#00bfff" aria-label="하늘색 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#0000ff" style="background-color:#0000ff" aria-label="파랑 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#8a2be2" style="background-color:#8a2be2" aria-label="보라 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ff69b4" style="background-color:#ff69b4" aria-label="핑크 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#a0522d" style="background-color:#a0522d" aria-label="갈색 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#ffb6c1" style="background-color:#ffb6c1" aria-label="연분홍 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#98fb98" style="background-color:#98fb98" aria-label="연두 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#87ceeb" style="background-color:#87ceeb" aria-label="연하늘 색상 선택"></button>
+        <button type="button" class="swatch" data-color="#f5deb3" style="background-color:#f5deb3" aria-label="베이지 색상 선택"></button>
+        <input type="color" id="custom-color-input" class="swatch custom-swatch" value="#000000" aria-label="사용자 지정 색상 선택">
+      </div>
+
+      <div class="toolbar">
+        <button id="eraser-btn" type="button" class="tool-btn" aria-pressed="false">지우개</button>
+        <button id="clear-btn" type="button" class="tool-btn">전체 지우기</button>
+        <button id="save-btn" type="button" class="tool-btn tool-btn-primary">저장</button>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <p>&copy; 2026 My Blog</p>
+  </footer>
+  <script src="../js/theme.js" defer></script>
+  <script src="editor.js" defer></script>
+</body>
+</html>
